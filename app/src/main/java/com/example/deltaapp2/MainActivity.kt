@@ -44,6 +44,8 @@ import com.example.deltaapp2.ui.theme.LoginScreen
 import com.example.deltaapp2.ui.theme.RegisterScreen
 import android.media.MediaPlayer
 import androidx.compose.ui.platform.LocalContext
+import com.example.deltaapp2.ui.theme.LeaderScreen
+import com.example.deltaapp2.ui.theme.SettingsScreen
 import java.io.File
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +55,7 @@ class MainActivity : ComponentActivity() {
             DeltaApp2Theme {
                 val navController = rememberNavController()
                 val viewModel: AstroViewModel = viewModel()
-                NavHost(navController=navController, startDestination = "Game Screen"){
+                NavHost(navController=navController, startDestination = "Login Register"){
                     composable("Login Register"){
                         LoginRegister(navController=navController)
                     }
@@ -67,7 +69,13 @@ class MainActivity : ComponentActivity() {
                         HomeScreen(navController=navController,viewModel=viewModel)
                     }
                     composable("Game Screen"){
-                        GameScreen(viewModel=viewModel)
+                        GameScreen(viewModel=viewModel, navController = navController)
+                    }
+                    composable("Leader Board"){
+                        LeaderScreen(navController = navController,viewModel=viewModel)
+                    }
+                    composable("settings"){
+                        SettingsScreen(viewModel,navController)
                     }
 
                 }
@@ -78,12 +86,3 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DeltaApp2Theme {
-        var viewModel: AstroViewModel = viewModel()
-        GameScreen(viewModel=viewModel)
-    }
-}

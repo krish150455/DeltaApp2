@@ -1,6 +1,7 @@
 package com.example.deltaapp2.ui.theme
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -125,7 +126,7 @@ fun LoginScreen(navController: NavController,viewModel: AstroViewModel){
                 fontSize = 15.sp,
                 color = Color.Gray
             )
-            TextField(   //BE CAREFUL WITH CONVERSIONS FOR TEXTFIELD
+            TextField(
                 value = viewModel.username,
                 onValueChange = { text ->
                     viewModel.username = text
@@ -151,7 +152,7 @@ fun LoginScreen(navController: NavController,viewModel: AstroViewModel){
                 fontSize = 15.sp,
                 color = Color.Gray
             )
-            TextField(   //BE CAREFUL WITH CONVERSIONS FOR TEXTFIELD
+            TextField(
                 value = viewModel.password,
                 onValueChange = { text ->
                     viewModel.password = text
@@ -209,8 +210,10 @@ fun RegisterScreen(navController: NavController,viewModel: AstroViewModel){
             viewModel.AuthError = ""
         }
         LaunchedEffect(viewModel.user) { //kinda use for navigating with state change and not with button
+            Log.d("AUTH", "LaunchedEffect fired")
+            Log.d("AUTH", "User = ${viewModel.user}")
             if (viewModel.user != null) {
-                navController.navigate("home")
+                navController.navigate("Login")
             }
         }
         LaunchedEffect(viewModel.AuthError) {
